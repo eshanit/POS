@@ -342,7 +342,7 @@ class ReportController extends Controller
         if (\Illuminate\Support\Facades\Gate::has('view-shrinkage-report')) {
             \Illuminate\Support\Facades\Gate::authorize('view-shrinkage-report');
         }
-        $query = \App\Models\StockMovement::query()->where('type', 'out');
+        $query = \App\Models\StockMovement::query()->where('type', 'out')->whereNotNull('reason');
 
         if ($request->date_from) {
             $query->whereDate('date', '>=', $request->date_from);
@@ -374,7 +374,7 @@ class ReportController extends Controller
             \Illuminate\Support\Facades\Gate::authorize('view-shrinkage-report');
         }
 
-        $query = \App\Models\StockMovement::query()->where('type', 'out');
+        $query = \App\Models\StockMovement::query()->where('type', 'out')->whereNotNull('reason');
 
         if ($request->date_from) {
             $query->whereDate('date', '>=', $request->date_from);
